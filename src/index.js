@@ -124,6 +124,12 @@ app.get('/v2/book/search', (req, res) => {
             };
             if (list.length > 0) {
                 loop(0);
+            } else {
+                res.send({
+                    success: false,
+                    message: e.toString(),
+                    books: null,
+                });
             }
         } catch (e) {
             res.send({
