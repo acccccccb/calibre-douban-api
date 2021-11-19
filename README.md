@@ -8,7 +8,7 @@
 
 # PM2
 
-`pm2 start node ./src/index.js`
+`pm2 start src/index.js`
 
 # 可选参数
 
@@ -18,7 +18,7 @@
 
 监听端口：--port=8085
 
-eg: `pm2 start node path/to/src/index.js --maxResult=5 --intervalTime=200 --port=8085`
+eg: `pm2 start src/index.js --name="calibre-douban-api" --maxResult=5 --intervalTime=200 --port=8085`
 
 # 开发
 
