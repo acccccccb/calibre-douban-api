@@ -1,0 +1,27 @@
+{
+    "name": "calibre-douban-api",
+    "version": "1.0.0",
+    "description": "View douban.com in command line",
+    "main": "src/index.js",
+    "scripts": {
+        "start": "node src/index.js",
+        "dev": "nodemon src/index.js --maxResult=5 --intervalTime=200 --port=8085",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+        "douban"
+    ],
+    "nodemonConfig": {
+        "ignore": [
+            "node_modules/*"
+        ],
+        "delay": 1000
+    },
+    "author": "acccccccb",
+    "dependencies": {
+        "express": "^4.17.1",
+        "got": "^11.8.2"
+    },
+    "license": "ISC",
+    "devDependencies": {}
+}
