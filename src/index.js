@@ -4,9 +4,11 @@ const app = index();
 const arguments = process.argv.splice(2);
 const params = {};
 arguments.forEach(item => {
-    const key = item.match(/(?<=-{2})(\S+)(?==)/g)[0];
-    const value = item.split('=')[1];
-    params[key] = value;
+    if(item.split('=').length === 2) {
+        const key = item.split('=')[0].replace('--', '');
+        const value = item.split('=')[1];
+        params[key] = value;
+    }
 });
 const port = params.port ? Number(params.port) : 8085;
 const maxResult = params.maxResult ? Number(params.maxResult) : 5;
@@ -56,7 +58,14 @@ app.get('/v2/book/search', (req, res) => {
                 getDetail(id).then((detail) => {
                     const rep = /(?<=<script type="application\/ld\+json">\s)(\s|\S)*?(?=\s<\/script>)/g;
                     let repMatch = detail.body.match(rep);
-                    repMatch = Array.isArray(repMatch) ? JSON.parse(repMatch) : null;
+                    console.log(repMatch);
+                    try {
+                        repMatch = Array.isArray(repMatch) ? JSON.parse(repMatch) : null;
+                    } catch (e) {
+                        repMatch = {
+                            author: [],
+                        }
+                    }
 
                     const author = repMatch ? repMatch.author.map((mapItem) => decodeURI(mapItem.name || '')) : [];
                     const isbn13 = repMatch ? repMatch.isbn13 : null;
